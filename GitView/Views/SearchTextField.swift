@@ -33,5 +33,7 @@ class SearchTextField: UITextField {
         autocorrectionType = .no
         translatesAutoresizingMaskIntoConstraints = false
         placeholder = "Enter a username"
+        returnKeyType = .search
+    
     }
 }
