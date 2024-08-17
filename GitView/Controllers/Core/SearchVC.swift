@@ -27,7 +27,8 @@ class SearchVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+        super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     @objc private func pushToFollowersListVC (){
@@ -42,18 +43,7 @@ class SearchVC: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-//    private func presentAlert(){
-////        let alert = UIAlertController(title: "", message: "the entered username is not valid", preferredStyle: .alert)
-////        let action = UIAlertAction(title: "ok", style: .default)
-////        alert.addAction(action)
-//        DispatchQueue.main.async {
-//            let vc = GitAlertVC(alertTitle: "empty username", massage: "the entered username is not valid", buttonTitle: "OK")
-//            vc.modalPresentationStyle = .overFullScreen
-//            vc.modalTransitionStyle = .crossDissolve
-//            self.present(vc, animated: true)
-//        }
-//       
-//    }
+
     private func createDismissKeyboardTapGesture(){
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
