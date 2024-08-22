@@ -5,10 +5,14 @@
 //  Created by Sina Vosough Nia on 5/27/1403 AP.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
+    
     static let shared = NetworkManager()
+    
+    let cache = NSCache<NSString,UIImage>()
+    
     private let baseURL = "https://api.github.com"
     private init () {}
     

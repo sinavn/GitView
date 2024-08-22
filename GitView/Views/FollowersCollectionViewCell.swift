@@ -10,7 +10,7 @@ import UIKit
 class FollowersCollectionViewCell: UICollectionViewCell {
     static let identifier = "FollowersCollectionViewCell"
     
-    let follower : Follower? = nil
+    var follower : Follower? = nil
     
     let userLabel = GitTitleLabel(textAlignment: .center, fontSize: 16)
     
@@ -20,6 +20,9 @@ class FollowersCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(imageView)
         addSubview(userLabel)
+        Task{
+            await imageView.downloadImage(urlString: follower?.avatarUrl ?? "")
+        }
         configureConstraints()
     }
     
@@ -45,5 +48,6 @@ class FollowersCollectionViewCell: UICollectionViewCell {
     
     func configureUser(follower:Follower){
         userLabel.text = follower.login
+        self.follower = follower
     }
 }

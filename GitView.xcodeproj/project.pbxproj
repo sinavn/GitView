@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C61CD5E2C74950B000F6620 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61CD5D2C74950B000F6620 /* UIHelper.swift */; };
 		6C692A3D2C6DF4D500E0E669 /* GitTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A3C2C6DF4D500E0E669 /* GitTitleLabel.swift */; };
 		6C692A3F2C6DF7A800E0E669 /* GitBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A3E2C6DF7A800E0E669 /* GitBodyLabel.swift */; };
 		6C692A412C6DF98B00E0E669 /* GitAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A402C6DF98B00E0E669 /* GitAlertVC.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C61CD5D2C74950B000F6620 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		6C692A3C2C6DF4D500E0E669 /* GitTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitTitleLabel.swift; sourceTree = "<group>"; };
 		6C692A3E2C6DF7A800E0E669 /* GitBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBodyLabel.swift; sourceTree = "<group>"; };
 		6C692A402C6DF98B00E0E669 /* GitAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitAlertVC.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C61CD5C2C7494E4000F6620 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6C61CD5D2C74950B000F6620 /* UIHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		6C692A422C6E1BA000E0E669 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 			children = (
 				6C8609BE2C69F9BC00D33CD6 /* AppDelegate.swift */,
 				6C8609C02C69F9BC00D33CD6 /* SceneDelegate.swift */,
+				6C61CD5C2C7494E4000F6620 /* Utilities */,
 				6C692A5B2C70D9D600E0E669 /* Managers */,
 				6C692A422C6E1BA000E0E669 /* Extensions */,
 				6C8609D82C6A125900D33CD6 /* Views */,
@@ -229,6 +240,7 @@
 				6C8609D32C6A10DA00D33CD6 /* SearchVC.swift in Sources */,
 				6C692A3D2C6DF4D500E0E669 /* GitTitleLabel.swift in Sources */,
 				6C8609DB2C6A12EA00D33CD6 /* MainTabBarVC.swift in Sources */,
+				6C61CD5E2C74950B000F6620 /* UIHelper.swift in Sources */,
 				6CFC28C22C6B415100DE2416 /* GitButton.swift in Sources */,
 				6C8609D52C6A112500D33CD6 /* FavoriteListVC.swift in Sources */,
 				6C692A412C6DF98B00E0E669 /* GitAlertVC.swift in Sources */,

@@ -50,22 +50,9 @@ class FollowerListVC: UIViewController {
     
     private func configureCollectionView () {
         followersCollection.register(FollowersCollectionViewCell.self, forCellWithReuseIdentifier: FollowersCollectionViewCell.identifier)
-        followersCollection.setCollectionViewLayout(configureCollectionFlowLayout(), animated: true)
+        followersCollection.setCollectionViewLayout(UIHelper.configureCollectionFlowLayout(view: view), animated: true)
         view.addSubview(followersCollection)
-//        followersCollection.dataSource = self
-//        followersCollection.delegate = self
-    }
-    
-    private func configureCollectionFlowLayout ()->UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding : CGFloat = 16
-        let itemSpacing : CGFloat = 10
-        let itemWidth = (width - (padding * 2 ) - (itemSpacing * 2 )) / 3
 
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset =  UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth + 30)
-        return layout
     }
     
     private func configureDataSource (){
@@ -84,16 +71,3 @@ class FollowerListVC: UIViewController {
     }
 }
 
-//extension FollowerListVC : UICollectionViewDelegate , UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return followers.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowersCollectionViewCell.identifier, for: indexPath) as? FollowersCollectionViewCell else { return UICollectionViewCell()}
-//        cell.configureUser(follower: followers[indexPath.row])
-//        return cell
-//    }
-//    
-//    
-//}
