@@ -12,7 +12,6 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     let cache = NSCache<NSString,UIImage>()
-    
     private let baseURL = "https://api.github.com"
     private init () {}
     
@@ -40,7 +39,7 @@ class NetworkManager {
         }
     }
     func getFollowers (for username :String , page :Int) async throws -> [Follower] {
-        guard let url = URL(string: baseURL+"/users/\(username)/following?per_page=100&page=\(page)")else{throw NetworkError.invalidURL}
+        guard let url = URL(string: baseURL+"/users/\(username)/followers?per_page=100&page=\(page)")else{throw NetworkError.invalidURL}
         do {
               let (data , response) = try await URLSession.shared.data(from: url)
             guard let response = response as? HTTPURLResponse else{

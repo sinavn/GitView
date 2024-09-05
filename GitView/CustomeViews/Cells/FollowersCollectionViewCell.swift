@@ -20,9 +20,6 @@ class FollowersCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(imageView)
         addSubview(userLabel)
-        Task{
-            await imageView.downloadImage(urlString: follower?.avatarUrl ?? "")
-        }
         configureConstraints()
     }
     
@@ -49,5 +46,8 @@ class FollowersCollectionViewCell: UICollectionViewCell {
     func configureUser(follower:Follower){
         userLabel.text = follower.login
         self.follower = follower
+        Task{
+            await imageView.downloadImage(urlString: follower.avatarUrl)
+        }
     }
 }

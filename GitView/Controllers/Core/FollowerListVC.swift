@@ -11,27 +11,24 @@ class FollowerListVC: UIViewController {
     
     var username: String = ""
     var followers : [Follower] = []
+    var filteredFollowers : [Follower] = []
+    var userHaveMoreFollowers : Bool = true
+    var page = 1
     let followersCollection = UICollectionView(frame: .zero ,collectionViewLayout: UICollectionViewLayout())
+    let emptyStateView = EmptyStateView()
     enum Section {
         case main
     }
     var dataSource : UICollectionViewDiffableDataSource<Section, Follower>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
         configureCollectionView()
         configureDataSource()
-        Task{
-            do{
-                let result = try await NetworkManager.shared.getFollowers(for: username, page: 1)
-                followers = result
-                updateData()
-            }catch let error as NetworkManager.NetworkError{
-                presentGitAlertOnMainThread(title: "Oops!", massage: error.localizedDescription, buttonTitle: "OK")
-                print(error.localizedDescription)
-            }
-        }
-        
+        getFollowers(username: username, page: page)
+        configureSearchController()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,22 +49,82 @@ class FollowerListVC: UIViewController {
         followersCollection.register(FollowersCollectionViewCell.self, forCellWithReuseIdentifier: FollowersCollectionViewCell.identifier)
         followersCollection.setCollectionViewLayout(UIHelper.configureCollectionFlowLayout(view: view), animated: true)
         view.addSubview(followersCollection)
+        followersCollection.delegate = self
 
+    }
+    
+    private func configureSearchController (){
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for User"
+        navigationItem.searchController = searchController
+    }
+    
+    private func getFollowers(username : String , page:Int){
+        showLoadingView()
+        Task{
+            do{
+                let result = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                await MainActor.run {
+                    dismissLoadingView()
+                    followers.append(contentsOf: result)
+                    if followers.isEmpty {
+                        showEmptyStateView(message: "This user has no followers.🤕", view: self.view)
+                    }
+                }
+                if result.count < 100 {userHaveMoreFollowers = false}
+                updateData(on: followers)
+            }catch let error as NetworkManager.NetworkError{
+                presentGitAlertOnMainThread(title: "Oops!", massage: error.localizedDescription, buttonTitle: "OK")
+                dismissLoadingView()
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func configureDataSource (){
         dataSource = UICollectionViewDiffableDataSource(collectionView: followersCollection, cellProvider: { collectionView, indexPath, follower in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowersCollectionViewCell.identifier, for: indexPath) as? FollowersCollectionViewCell else {return UICollectionViewCell()}
             cell.configureUser(follower: follower)
+            
             return cell
         })
     }
     
-    private func updateData(){
+    private func updateData(on followers:[Follower]){
         var snapshot = NSDiffableDataSourceSnapshot<Section,Follower>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)
-        dataSource?.apply(snapshot , animatingDifferences: true)
+            self.dataSource?.apply(snapshot , animatingDifferences: true)
     }
 }
 
+extension FollowerListVC : UICollectionViewDelegate {
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let scrollHeight = scrollView.contentSize.height
+        let contentOffset = scrollView.contentOffset.y
+        let height = view.bounds.height
+        if  contentOffset > (scrollHeight - height ) {
+            guard userHaveMoreFollowers else {return}
+            page += 1
+            getFollowers(username: username, page: page)
+
+        }
+    }
+}
+
+extension FollowerListVC : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text else {return}
+        if filter.isEmpty{
+            updateData(on: followers)
+            return
+        }
+        filteredFollowers = followers.filter({$0.login.lowercased().contains (filter.lowercased())})
+        
+        updateData(on: filteredFollowers)
+    }
+    
+    
+}

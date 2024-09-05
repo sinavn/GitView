@@ -8,7 +8,8 @@
 import UIKit
 
 class MainTabBarVC: UITabBarController {
-
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -20,8 +21,13 @@ class MainTabBarVC: UITabBarController {
         favoriteListNC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
         tabBar.tintColor = .label
-         
+        
         setViewControllers([searchNC , favoriteListNC], animated: true)
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        
         }
     
 

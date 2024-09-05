@@ -11,6 +11,13 @@ class GitImageView: UIImageView {
     
     let placeHolderImage = UIImage(named: "avatar-placeholder")
     let cache = NetworkManager.shared.cache
+    let activityIndicator : UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -21,18 +28,30 @@ class GitImageView: UIImageView {
     }
     
     private func configure(){
-        image = placeHolderImage
+        addSubview(activityIndicator)
         layer.cornerRadius = 10
         clipsToBounds = true
         contentMode = .scaleAspectFit
         translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
     }
     
     func downloadImage (urlString : String) async {
+        image = placeHolderImage
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
         
         let objectKey  = NSString(string: urlString)
         if let cachedImage = cache.object(forKey: objectKey){
-            image = cachedImage
+            DispatchQueue.main.async {
+                self.image = cachedImage
+                self.activityIndicator.stopAnimating()
+            }
             return
         }
         
@@ -40,11 +59,18 @@ class GitImageView: UIImageView {
         do {
             let (data , _ ) = try await URLSession.shared.data(from: url)
             let avatarImage = UIImage(data: data)
-            image = avatarImage
+            DispatchQueue.main.async {
+                self.image = avatarImage
+                self.activityIndicator.stopAnimating()
+            }
+          
             if let safeAvatar = avatarImage {
                 cache.setObject(safeAvatar, forKey: objectKey)
             }
         } catch {
+            DispatchQueue.main.async {
+                self.image = self.placeHolderImage
+            }
         }
     }
 }

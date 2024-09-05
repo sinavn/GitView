@@ -12,6 +12,9 @@ class SearchVC: UIViewController {
     let logoImageView = UIImageView()
     let searchTextField = SearchTextField()
     let gitActionButton = GitButton(backgroundColor: .systemGreen, title: "Search username")
+    var gitActionButtonBottomConstraint : NSLayoutConstraint?
+    var searchTextFieldtopConstraints : NSLayoutConstraint?
+    var searchTextFieldBottomConstraints : NSLayoutConstraint?
     var isEnteredUsernameValid : Bool {
         !searchTextField.text!.isEmpty
     }
@@ -62,22 +65,25 @@ class SearchVC: UIViewController {
     }
     
     private func configureConstraints(){
+
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.widthAnchor.constraint(equalToConstant: 200),
             logoImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
-        
+        searchTextFieldtopConstraints = searchTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 50)
         NSLayoutConstraint.activate([
-            searchTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 50),
+            searchTextFieldtopConstraints!,
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             searchTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+        gitActionButtonBottomConstraint = gitActionButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -40)
+
         NSLayoutConstraint.activate([
-            gitActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            gitActionButtonBottomConstraint!,
             gitActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             gitActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             gitActionButton.heightAnchor.constraint(equalToConstant: 50)
@@ -87,17 +93,30 @@ class SearchVC: UIViewController {
     private func configureKeyboardObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange) , name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     @objc private func keyboardWillChange (_ notification:Notification){
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        let keyboardHeight = keyboardFrame.cgRectValue.height
+
         let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
         
-        UIView.animate(withDuration: 0.3) {
-            self.gitActionButton.transform = isKeyboardShowing ? .init(translationX: 0, y: -keyboardHeight + self.view.safeAreaInsets.bottom + 20) : .identity
-            self.searchTextField.transform = isKeyboardShowing ? .init(translationX: 0, y: -30) : .identity
+        gitActionButtonBottomConstraint?.constant = isKeyboardShowing ? -20 : -40
+        view.layoutIfNeeded()
+        
+        let buttonMinY = gitActionButton.frame.minY
+        let searchMaxY = searchTextField.frame.maxY
+
+        if isKeyboardShowing && (buttonMinY - 10) < searchMaxY {
+            searchTextFieldBottomConstraints = searchTextField.bottomAnchor.constraint(equalTo: gitActionButton.topAnchor, constant: -10)
+            searchTextFieldtopConstraints?.isActive = false
+            searchTextFieldBottomConstraints?.isActive = true
+        } else if !isKeyboardShowing {
+            searchTextFieldBottomConstraints?.isActive = false
+            searchTextFieldtopConstraints?.isActive = true
+
         }
+        view.layoutIfNeeded()
+        
     }
     
 }
