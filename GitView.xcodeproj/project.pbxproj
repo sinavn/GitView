@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6C1B18012C86207200C86865 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1B18002C86207200C86865 /* EmptyStateView.swift */; };
+		6C1B180E2C89F0A500C86865 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1B180D2C89F0A500C86865 /* UserInfoViewController.swift */; };
+		6C3D19EA2C96F08000EAEAF5 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D19E92C96F08000EAEAF5 /* UIColorExtension.swift */; };
+		6C3D19EC2C9826BA00EAEAF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D19EB2C9826BA00EAEAF5 /* Constants.swift */; };
 		6C61CD5E2C74950B000F6620 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61CD5D2C74950B000F6620 /* UIHelper.swift */; };
 		6C692A3D2C6DF4D500E0E669 /* GitTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A3C2C6DF4D500E0E669 /* GitTitleLabel.swift */; };
 		6C692A3F2C6DF7A800E0E669 /* GitBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A3E2C6DF7A800E0E669 /* GitBodyLabel.swift */; };
@@ -18,6 +21,7 @@
 		6C692A5D2C70DA0B00E0E669 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A5C2C70DA0B00E0E669 /* NetworkManager.swift */; };
 		6C692A622C73130400E0E669 /* FollowersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A612C73130400E0E669 /* FollowersCollectionViewCell.swift */; };
 		6C692A642C7372A000E0E669 /* GitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C692A632C7372A000E0E669 /* GitImageView.swift */; };
+		6C750BBD2C982F7B0014055B /* ReadmeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C750BBC2C982F7B0014055B /* ReadmeWebView.swift */; };
 		6C81AB912C6D2AFC002E964E /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C81AB902C6D2AFB002E964E /* FollowerListVC.swift */; };
 		6C8609BF2C69F9BC00D33CD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8609BE2C69F9BC00D33CD6 /* AppDelegate.swift */; };
 		6C8609C12C69F9BC00D33CD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8609C02C69F9BC00D33CD6 /* SceneDelegate.swift */; };
@@ -32,6 +36,9 @@
 
 /* Begin PBXFileReference section */
 		6C1B18002C86207200C86865 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		6C1B180D2C89F0A500C86865 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		6C3D19E92C96F08000EAEAF5 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		6C3D19EB2C9826BA00EAEAF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6C61CD5D2C74950B000F6620 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		6C692A3C2C6DF4D500E0E669 /* GitTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitTitleLabel.swift; sourceTree = "<group>"; };
 		6C692A3E2C6DF7A800E0E669 /* GitBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBodyLabel.swift; sourceTree = "<group>"; };
@@ -42,6 +49,7 @@
 		6C692A5C2C70DA0B00E0E669 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6C692A612C73130400E0E669 /* FollowersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCollectionViewCell.swift; sourceTree = "<group>"; };
 		6C692A632C7372A000E0E669 /* GitImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitImageView.swift; sourceTree = "<group>"; };
+		6C750BBC2C982F7B0014055B /* ReadmeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeWebView.swift; sourceTree = "<group>"; };
 		6C81AB902C6D2AFB002E964E /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 		6C8609BB2C69F9BC00D33CD6 /* GitView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8609BE2C69F9BC00D33CD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,10 +132,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		6C3D19ED2C982E7100EAEAF5 /* WebViews */ = {
+			isa = PBXGroup;
+			children = (
+				6C750BBC2C982F7B0014055B /* ReadmeWebView.swift */,
+			);
+			path = WebViews;
+			sourceTree = "<group>";
+		};
 		6C61CD5C2C7494E4000F6620 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				6C61CD5D2C74950B000F6620 /* UIHelper.swift */,
+				6C3D19EB2C9826BA00EAEAF5 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -136,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				6C692A432C6E1BC300E0E669 /* UIViewControllerExtension.swift */,
+				6C3D19E92C96F08000EAEAF5 /* UIColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -186,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				6C8609D92C6A129400D33CD6 /* Core */,
+				6C1B180D2C89F0A500C86865 /* UserInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -202,6 +221,7 @@
 		6C8609D82C6A125900D33CD6 /* CustomeViews */ = {
 			isa = PBXGroup;
 			children = (
+				6C3D19ED2C982E7100EAEAF5 /* WebViews */,
 				6C1B17FF2C861F6300C86865 /* Views */,
 				6C1B17FE2C861F4100C86865 /* Cells */,
 				6C1B17FD2C861EFA00C86865 /* ImageViews */,
@@ -299,6 +319,7 @@
 				6C1B18012C86207200C86865 /* EmptyStateView.swift in Sources */,
 				6C8609D32C6A10DA00D33CD6 /* SearchVC.swift in Sources */,
 				6C692A3D2C6DF4D500E0E669 /* GitTitleLabel.swift in Sources */,
+				6C3D19EC2C9826BA00EAEAF5 /* Constants.swift in Sources */,
 				6C8609DB2C6A12EA00D33CD6 /* MainTabBarVC.swift in Sources */,
 				6C61CD5E2C74950B000F6620 /* UIHelper.swift in Sources */,
 				6CFC28C22C6B415100DE2416 /* GitButton.swift in Sources */,
@@ -311,6 +332,9 @@
 				6C692A442C6E1BC300E0E669 /* UIViewControllerExtension.swift in Sources */,
 				6C692A3F2C6DF7A800E0E669 /* GitBodyLabel.swift in Sources */,
 				6C692A5D2C70DA0B00E0E669 /* NetworkManager.swift in Sources */,
+				6C750BBD2C982F7B0014055B /* ReadmeWebView.swift in Sources */,
+				6C1B180E2C89F0A500C86865 /* UserInfoViewController.swift in Sources */,
+				6C3D19EA2C96F08000EAEAF5 /* UIColorExtension.swift in Sources */,
 				6C81AB912C6D2AFC002E964E /* FollowerListVC.swift in Sources */,
 				6C8609C12C69F9BC00D33CD6 /* SceneDelegate.swift in Sources */,
 			);

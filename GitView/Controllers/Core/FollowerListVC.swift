@@ -112,6 +112,18 @@ extension FollowerListVC : UICollectionViewDelegate {
 
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = UserInfoViewController()
+        let navController = UINavigationController(rootViewController: vc)
+        if let searchText = navigationItem.searchController?.searchBar.text , !searchText.isEmpty{
+            vc.getUserInfo(userName: filteredFollowers[indexPath.row].login)
+        }else{
+            vc.getUserInfo(userName: followers[indexPath.row].login)
+        }
+        
+        present(navController, animated: true)
+    }
 }
 
 extension FollowerListVC : UISearchResultsUpdating {

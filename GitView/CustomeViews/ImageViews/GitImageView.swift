@@ -70,6 +70,8 @@ class GitImageView: UIImageView {
         } catch {
             DispatchQueue.main.async {
                 self.image = self.placeHolderImage
+                self.activityIndicator.stopAnimating()
+
             }
         }
     }
